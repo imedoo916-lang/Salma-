@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لحبيبتي سلومتي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffdde1);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            z-index: 2;
+        }
+        
+        .message-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        .message-line {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+        
+        .message-line:nth-child(1) { 
+            animation-delay: 1s; 
+            font-family: 'Dancing Script', cursive;
+            color: #ff6b8a;
+            font-size: 3.5rem;
+        }
+        .message-line:nth-child(2) { 
+            animation-delay: 1.8s; 
+            color: #ff4d6d;
+            font-weight: 600;
+        }
+        .message-line:nth-child(3) { 
+            animation-delay: 2.6s; 
+            color: #ff3366;
+            font-style: italic;
+        }
+        
+        @keyframes fadeIn {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.7;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0) scale(1); 
+            }
+            33% { 
+                transform: translateY(-25px) rotate(5deg) scale(1.1); 
+            }
+            66% { 
+                transform: translateY(-15px) rotate(-4deg) scale(0.95); 
+            }
+        }
+        
+        .hearts-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            animation: floatHeart 15s infinite linear;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .love-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            opacity: 0;
+            animation: lovePulse 4s infinite;
+            z-index: 2;
+            color: rgba(255, 107, 138, 0.1);
+        }
+
+        @keyframes lovePulse {
+            0%, 100% {
+                opacity: 0.05;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .kiss-animation {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            opacity: 0;
+            animation: kissFloat 6s infinite ease-in-out;
+            z-index: 2;
+        }
+
+        @keyframes kissFloat {
+            0%, 100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(0);
+            }
+            25%, 75% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-40px);
+            }
+        }
+
+        .romantic-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .message-line {
+                font-size: 2rem;
+            }
+            .message-line:nth-child(1) {
+                font-size: 2.5rem;
+            }
+            .message-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-box">
+            <div class="message-line">SALOMTY 💗✨</div>
+            <div class="message-line">I love you , salma 💞 ✨</div>
+            <div class="message-line">give me a kiss 😘♥️</div>
+        </div>
+        
+        <div class="love-effect">❤️</div>
+        <div class="kiss-animation">💋</div>
+        
+        <div class="floating-elements"></div>
+        <div class="hearts-background"></div>
+        <div class="sparkles"></div>
+        <div class="romantic-border"></div>
+    </div>
+
+    <script>
+        // إنشاء العناصر العائمة
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            const symbols = ['❤️', '✨', '🌸', '💖', '🌹', '💫', '🌟', '💕', '🥰', '🌺', '💘', '💝'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 8}s`;
+                element.style.fontSize = `${1.5 + Math.random() * 1.5}rem`;
+                
+                container.appendChild(element);
+            }
+        }
+
+        // إنشاء القلوب العائمة في الخلفية
+        function createFloatingHearts() {
+            const container = document.querySelector('.hearts-background');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 15}s`;
+                heart.style.animationDuration = `${12 + Math.random() * 10}s`;
+                container.appendChild(heart);
+            }
+        }
+
+        // إنشاء الومضات البراقة
+        function createSparkles() {
+            const container = document.querySelector('.sparkles');
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.innerHTML = '✨';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.fontSize = `${0.8 + Math.random() * 1}rem`;
+                container.appendChild(sparkle);
+            }
+        }
+
+        // تأثير النبضات الرومانسية
+        function startRomanticEffects() {
+            const loveEffect = document.querySelector('.love-effect');
+            const kissAnimation = document.querySelector('.kiss-animation');
+            
+            // تأثير القلب النابض
+            loveEffect.style.animation = 'lovePulse 4s infinite';
+            
+            // تأثير القبلة العائمة
+            kissAnimation.style.animation = 'kissFloat 6s infinite ease-in-out';
+        }
+
+        // بدء جميع التأثيرات بعد تحميل الصفحة
+        window.onload = function() {
+            createFloatingElements();
+            createFloatingHearts();
+            createSparkles();
+            startRomanticEffects();
+            
+            // إضافة تأثيرات إضافية بعد تأخير
+            setTimeout(() => {
+                // إضافة المزيد من الومضات
+                createSparkles();
+            }, 2000);
+        };
+
+        // تأثير عند تحريك الماوس
+        document.addEventListener('mousemove', function(e) {
+            const sparkles = document.querySelector('.sparkles');
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = `${e.clientX}px`;
+            sparkle.style.top = `${e.clientY}px`;
+            sparkle.style.animation = 'sparkle 1.5s forwards';
+            sparkle.style.fontSize = `${0.5 + Math.random() * 1}rem`;
+            sparkles.appendChild(sparkle);
+            
+            // إزالة الوميض بعد انتهاء animation
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
